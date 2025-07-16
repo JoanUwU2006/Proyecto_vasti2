@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cine Lumiere - La magia del cine clásico y moderno</title>
+<style>
+:root {
+--primary: #0d1b2a;
+--secondary: #1b263b;
+--accent: #415a77;
+--light: #e0e1dd;
+--highlight: #ff9e00;
+}
+* {
+margin: 0;
+padding: 0;
+box-sizing: border-box;
+font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+body {
+background-color: var(--primary);
+color: var(--light);
+}
+header {
+background-color: var(--secondary);
+padding: 1rem;
+display: flex;
+justify-content: space-between;
+align-items: center;
+box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+}
+.logo {
+display: flex;
+align-items: center;
+}
+.logo h1 {
+font-size: 2rem;
+color: var(--highlight);
+text-transform: uppercase;
+}
+.logo small {
+margin-left: 10px;
+color: var(--light);
+font-style: italic;
+}
+nav ul {
+display: flex;
+list-style: none;
+}
+nav ul li {
+margin-left: 20px;
+}
+nav ul li a {
+color: var(--light);
+text-decoration: none;
+font-weight: 500;
+transition: color 0.3s;
+}
+nav ul li a:hover {
+color: var(--highlight);
+}
+.hero {
+height: 70vh;
+background-image: linear-gradient(rgba(13, 27, 42, 0.7), rgba(13, 27, 42, 0.7)),
+url('https://placehold.co/1920x1080/1b263b/e0e1dd?text=Cine+Lumiere&font=Montserrat');
+background-size: cover;
+background-position: center;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+text-align: center;
+padding: 0 20px;
+}
+.hero h2 {
+font-size: 3rem;
+margin-bottom: 20px;
+color: var(--highlight);
+}
+.hero p {
+font-size: 1.2rem;
+max-width: 800px;
+margin-bottom: 30px;
+}
+.btn {
+padding: 12px 30px;
+background-color: var(--highlight);
+color: var(--primary);
+border: none;
+border-radius: 5px;
+font-weight: bold;
+cursor: pointer;
+transition: all 0.3s;
+text-transform: uppercase;
+font-size: 0.9rem;
+}
+.btn:hover {
+background-color: var(--light);
+transform: translateY(-3px);
+}
+.container {
+max-width: 1200px;
+margin: 0 auto;
+padding: 2rem;
+}
+.section-title {
+text-align: center;
+margin-bottom: 3rem;
+font-size: 2rem;
+color: var(--highlight);
+position: relative;
+}
+.section-title::after {
+content: '';
+position: absolute;
+bottom: -10px;
+left: 50%;
+transform: translateX(-50%);
+width: 100px;
+height: 3px;
+background-color: var(--highlight);
+}
+.movies-grid {
+display: grid;
+grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+gap: 2rem;
+}
+.movie-card {
+background-color: var(--secondary);
+border-radius: 8px;
+overflow: hidden;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+transition: transform 0.3s;
+}
+.movie-card:hover {
+transform: translateY(-10px);
+}
+.movie-poster {
+width: 100%;
+height: 400px;
+object-fit: cover;
+}
+.movie-info {
+padding: 1.5rem;
+}
+.movie-title {
+font-size: 1.2rem;
+margin-bottom: 0.5rem;
+}
+.movie-meta {
+display: flex;
+justify-content: space-between;
+margin-bottom: 1rem;
+color: var(--accent);
+font-size: 0.9rem;
+}
+.movie-synopsis {
+margin-bottom: 1rem;
+font-size: 0.9rem;
+line-height: 1.5;
+}
+.booking-form {
+background-color: var(--secondary);
+padding: 2rem;
+border-radius: 8px;
+box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+}
+.form-grid {
+display: grid;
+grid-template-columns: repeat(2, 1fr);
+gap: 1.5rem;
+}
+.form-group {
+margin-bottom: 1.5rem;
+}
+.form-group label {
+display: block;
+margin-bottom: 0.5rem;
+font-weight: 500;
+}
+.form-control {
+width: 100%;
+padding: 10px;
+background-color: var(--primary);
+border: 1px solid var(--accent);
+border-radius: 4px;
+color: var(--light);
+}
+select.form-control {
+appearance: none;
+}
+.form-row {
+display: flex;
+gap: 1rem;
+}
+.payment-section {
+margin-top: 3rem;
+padding: 2rem;
+background-color: var(--secondary);
+border-radius: 8px;
+}
+.payment-methods {
+display: flex;
+gap: 1rem;
+margin-bottom: 2rem;
+}
+.payment-method {
+padding: 1rem;
+background-color: var(--primary);
+border-radius: 4px;
+cursor: pointer;
+transition: all 0.3s;
+flex: 1;
+text-align: center;
+}
+.payment-method.active {
+background-color: var(--accent);
+border: 1px solid var(--highlight);
+}
+.cart-summary {
+background-color: var(--secondary);
+padding: 1.5rem;
+border-radius: 8px;
+margin-top: 2rem;
+}
+.cart-item {
+display: flex;
+justify-content: space-between;
+margin-bottom: 0.5rem;
+}
+.cart-total {
+font-weight: bold;
+font-size: 1.2rem;
+margin-top: 1rem;
+border-top: 1px solid var(--accent);
+padding-top: 1rem;
+display: flex;
+justify-content: space-between;
+}
+footer {
+background-color: var(--secondary);
+padding: 2rem;
+text-align: center;
+margin-top: 3rem;
+}
+.footer-links {
+display: flex;
+justify-content: center;
+gap: 2rem;
+margin-bottom: 1.5rem;
+}
+.footer-links a {
+color: var(--light);
+text-decoration: none;
+}
+.footer-links a:hover {
+color: var(--highlight);
+}
+.social-icons {
+margin-bottom: 1.5rem;
+}
+.social-icons a {
+color: var(--light);
+margin: 0 10px;
+font-size: 1.5rem;
+}
+.social-icons a:hover {
+color: var(--highlight);
+}
+/* Modal */
+.modal {
+display: none;
+position: fixed;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.8);
+z-index: 1000;
+overflow-y: auto;
+}
+.modal-content {
+background-color: var(--secondary);
+margin: 5% auto;
+padding: 2rem;
+width: 80%;
+max-width: 800px;
+border-radius: 8px;
+position: relative;
+}
+.close-modal {
+position: absolute;
+top: 20px;
+right: 20px;
+font-size: 1.5rem;
+cursor: pointer;
+color: var(--light);
+}
+.seats-container {
+margin-top: 2rem;
+}
+.screen {
+background-color: var(--accent);
+color: var(--light);
+text-align: center;
+padding: 10px;
+margin-bottom: 2rem;
+border-radius: 5px;
+}
+.seats-grid {
+display: grid;
+grid-template-columns: repeat(10, 1fr);
+gap: 10px;
+justify-items: center;
+}
+.seat {
+width: 30px;
+height: 30px;
+background-color: #778da9;
+border-radius: 5px;
+cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: center;
+font-size: 0.7rem;
+}
+.seat.selected {
+background-color: var(--highlight);
+color: var(--primary);
+}
+.seat.reserved {
+background-color: #1b263b;
+cursor: not-allowed;
+}
+.seat-info {
+margin-top: 2rem;
+display: flex;
+justify-content: center;
+gap: 20px;
+}
+.seat-legend {
+display: flex;
+align-items: center;
+gap: 5px;
+}
+/* Responsive */
+@media (max-width: 768px) {
+.form-grid {
+grid-template-columns: 1fr;
+}
+.seats-grid {
+grid-template-columns: repeat(8, 1fr);
+}
+header {
+flex-direction: column;
+}
+nav ul {
+margin-top: 1rem;
+flex-wrap: wrap;
+justify-content: center;
+}
+nav ul li {
+margin: 5px 10px;
+}
+}
+@media (max-width: 480px) {
+.seats-grid {
+grid-template-columns: repeat(5, 1fr);
+}
+}
+</style>
+</head>
+<body>
+<header>
+<div class="logo">
+<h1>Cine Lumiere</h1>
+<small>Donde el cine cobra vida</small>
+</div>
+<nav>
+<ul>
+<li><a href="#cartelera">Cartelera</a></li>
+<li><a href="#dulceria">Dulcería</a></li>
+<li><a href="#booking">Reservar</a></li>
+<li><a href="#contacto">Contacto</a></li>
+<li><a href="#" onclick="openLoginModal()">Iniciar Sesión</a></li>
+</ul>
+</nav>
+</header>
+<section class="hero">
+<h2>Una experiencia cinematográfica inolvidable</h2>
+<p>Descubre lo mejor del cine internacional en la comodidad de nuestras salas de última generación</p>
+<button class="btn" onclick="scrollToBooking()">Comprar entradas</button>
+</section>
+
+<section id="cartelera" class="container">
+<h2 class="section-title">Cartelera Actual</h2>
+<div class="movies-grid" id="movies-grid-container">
+</div>
+</section>
+
+<section id="dulceria" class="container">
+  <h2 class="section-title">Dulcería</h2>
+  <div class="movies-grid" id="dulceria-grid-container">
+    </div>
+</section>
+
+<section id="booking" class="container">
+<h2 class="section-title">Reserva tus entradas</h2>
+<div class="booking-form">
+<form id="bookingForm">
+<div class="form-grid">
+<div class="form-group">
+<label for="movie">Película</label>
+<select id="movie" class="form-control" required>
+<option value="">Selecciona una película</option>
+</select>
+</div>
+<div class="form-group">
+<label for="date">Fecha</label>
+<input type="date" id="date" class="form-control" required>
+</div>
+<div class="form-group">
+<label for="time">Horario</label>
+<select id="time" class="form-control" required>
+<option value="">Selecciona horario</option>
+<option value="12:00">12:00 PM</option>
+<option value="15:30">3:30 PM</option>
+<option value="18:00">6:00 PM</option>
+<option value="21:00">9:00 PM</option>
+</select>
+</div>
+<div class="form-group">
+<label for="screen">Tipo de Sala</label>
+<select id="screen" class="form-control" required>
+<option value="">Selecciona tipo de sala</option>
+<option value="normal">Normal</option>
+<option value="premium">Premium</option>
+<option value="vip">VIP</option>
+</select>
+</div>
+</div>
+<div class="form-group">
+<label>Tipo de Entradas</label>
+<div class="form-row">
+<div class="form-group" style="flex: 1;">
+<label for="adults">Adultos</label>
+<input type="number" id="adults" class="form-control" min="0" value="0">
+</div>
+<div class="form-group" style="flex: 1;">
+<label for="children">Niños</label>
+<input type="number" id="children" class="form-control" min="0" value="0">
+</div>
+<div class="form-group" style="flex: 1;">
+<label for="seniors">Adultos Mayores</label>
+<input type="number" id="seniors" class="form-control" min="0" value="0">
+</div>
+</div>
+</div>
+<button type="button" class="btn" onclick="selectSeats()">Seleccionar Asientos</button>
+<button type="button" class="btn" style="margin-top: 1rem;" onclick="addCandyToCart()">Agregar Dulcería al Carrito</button>
+</form>
+</div>
+</section>
+
+<section class="payment-section container">
+<h2 class="section-title">Método de Pago</h2>
+<div class="payment-methods">
+<div class="payment-method active" onclick="selectPaymentMethod('card')">
+<h3>Tarjeta de Crédito/Débito</h3>
+</div>
+<div class="payment-method" onclick="selectPaymentMethod('cash')">
+<h3>Efectivo en Taquilla</h3>
+</div>
+</div>
+<form id="paymentForm" style="display: block;">
+<div class="form-grid">
+<div class="form-group">
+<label for="cardNumber">Número de Tarjeta</label>
+<input type="text" id="cardNumber" class="form-control" placeholder="1234 5678 9012 3456">
+</div>
+<div class="form-group">
+<label for="cardName">Nombre en la Tarjeta</label>
+<input type="text" id="cardName" class="form-control" placeholder="JUAN PEREZ">
+</div>
+<div class="form-group">
+<label for="expiry">Fecha de Expiración</label>
+<input type="text" id="expiry" class="form-control" placeholder="MM/AA">
+</div>
+<div class="form-group">
+<label for="cvv">CVV</label>
+<input type="text" id="cvv" class="form-control" placeholder="123">
+</div>
+</div>
+</form>
+<div class="cart-summary">
+<h3>Resumen de Compra</h3>
+<div class="cart-total">
+    <span>Total</span>
+    <span>$0.00</span>
+</div>
+<button type="button" class="btn" onclick="confirmarPago()" style="width: 100%; margin-top: 1.5rem;">Confirmar Pago</button>
+</div>
+</section>
+
+<footer id="contacto">
+<div class="footer-links">
+<a href="#">Términos y Condiciones</a>
+<a href="#">Aviso de Privacidad</a>
+<a href="#">Trabaja con Nosotros</a>
+<a href="#">Preguntas Frecuentes</a>
+</div>
+<div class="social-icons">
+<a href="#"><i class="fab fa-facebook"></i></a>
+<a href="#"><i class="fab fa-twitter"></i></a>
+<a href="#"><i class="fab fa-instagram"></i></a>
+<a href="#"><i class="fab fa-youtube"></i></a>
+</div>
+<p>Cine Lumiere © 2025 - Todos los derechos reservados</p>
+<p>Dirección: Av. Cinematográfica 123, Ciudad Filmsonia</p>
+</footer>
+
+<div id="loginModal" class="modal">
+  <div class="modal-content">
+    <span class="close-modal" onclick="closeModal('loginModal')">&times;</span>
+    <h2>Iniciar Sesión</h2>
+    <form id="loginForm">
+      <div class="form-group">
+        <label for="email">Email</label>
+        <input type="email" id="email" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="password">Contraseña</label>
+        <input type="password" id="password" class="form-control" required>
+      </div>
+      <button type="button" class="btn" onclick="validateLogin()">Ingresar</button>
+      <p style="margin-top: 1rem;">¿No tienes cuenta? <a href="#" onclick="showRegisterForm()">Regístrate aquí</a></p>
+    </form>
+    <form id="registerForm" style="display: none;">
+      <div class="form-group">
+        <label for="newUsername">Nuevo Usuario</label>
+        <input type="text" id="newUsername" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="newPassword">Nueva Contraseña</label>
+        <input type="password" id="newPassword" class="form-control" required>
+      </div>
+      <div class="form-group">
+        <label for="confirmPassword">Confirmar Contraseña</label>
+        <input type="password" id="confirmPassword" class="form-control" required>
+      </div>
+      <button type="button" class="btn" onclick="registerUser()">Registrarse</button>
+      <p style="margin-top: 1rem;">¿Ya tienes cuenta? <a href="#" onclick="showLoginForm()">Inicia sesión aquí</a></p>
+    </form>
+  </div>
+</div>
+
+<div id="seatsModal" class="modal">
+<div class="modal-content">
+<span class="close-modal" onclick="closeModal('seatsModal')">&times;</span>
+<h2>Selecciona tus asientos</h2>
+<div class="screen">Pantalla</div>
+<div class="seats-container">
+<div class="seats-grid" id="seatsGrid">
+</div>
+<div class="seat-info">
+<div class="seat-legend">
+<div class="seat" style="margin-right: 5px;"></div>
+<span>Disponible</span>
+</div>
+<div class="seat-legend">
+<div class="seat selected" style="margin-right: 5px;"></div>
+<span>Seleccionado</span>
+</div>
+<div class="seat-legend">
+<div class="seat reserved" style="margin-right: 5px;"></div>
+<span>Ocupado</span>
+</div>
+</div>
+</div>
+<button class="btn" onclick="confirmSeats()" style="margin-top: 2rem;">Confirmar Asientos</button>
+</div>
+</div>
+
+<script>
+// Objeto para guardar el estado de la orden actual
+let ordenActual = {
+    pelicula: { id: null, titulo: '' },
+    boletos: { adultos: 0, ninos: 0, mayores: 0 },
+    dulceria: [],
+    asientos: [],
+    total: 0
+};
+
+// --- FUNCIONES DE CARGA INICIAL ---
+document.addEventListener('DOMContentLoaded', () => {
+    cargarPeliculas();
+    cargarDulceria();
+});
+
+async function cargarPeliculas() {
+    try {
+        const response = await fetch('api.php?action=peliculas');
+        const peliculas = await response.json();
+
+        const grid = document.getElementById('movies-grid-container');
+        const movieSelect = document.getElementById('movie');
+
+        grid.innerHTML = '';
+        movieSelect.innerHTML = '<option value="">Selecciona una película</option>';
+
+        peliculas.forEach(pelicula => {
+            const movieCardHTML = `
+                <div class="movie-card" onclick="openBookingModal(${pelicula.id})">
+                    <img src="${pelicula.image}" alt="${pelicula.title}" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">${pelicula.title}</h3>
+                        <div class="movie-meta">
+                            <span>${pelicula.time}</span>
+                            <span>$${pelicula.price}</span>
+                        </div>
+                        <p class="movie-synopsis">${pelicula.synopsis}</p>
+                        <button class="btn">Comprar entradas</button>
+                    </div>
+                </div>
+            `;
+            grid.innerHTML += movieCardHTML;
+
+            const option = document.createElement('option');
+            option.value = pelicula.id;
+            option.textContent = pelicula.title;
+            movieSelect.appendChild(option);
+        });
+
+    } catch (error) {
+        console.error('Error al cargar las películas:', error);
+        document.getElementById('movies-grid-container').innerHTML = '<p>No se pudieron cargar las películas.</p>';
+    }
+}
+
+async function cargarDulceria() {
+    try {
+        const response = await fetch('api.php?action=dulceria');
+        const productos = await response.json();
+
+        const grid = document.getElementById('dulceria-grid-container');
+        grid.innerHTML = '';
+
+        productos.forEach(producto => {
+            const productoCardHTML = `
+                <div class="movie-card">
+                    <img src="${producto.imagen || 'https://placehold.co/400x300/1b263b/e0e1dd?text=' + producto.nombre}" alt="${producto.nombre}" class="movie-poster">
+                    <div class="movie-info">
+                        <h3 class="movie-title">${producto.nombre}</h3>
+                        <div class="movie-meta">
+                            <span>${producto.descripcion}</span>
+                            <span>$${producto.precio}</span>
+                        </div>
+                        <input type="number" class="form-control" min="0" placeholder="Cantidad" data-id="${producto.id}" data-nombre="${producto.nombre}" data-precio="${producto.precio}">
+                    </div>
+                </div>
+            `;
+            grid.innerHTML += productoCardHTML;
+        });
+
+    } catch (error) {
+        console.error('Error al cargar la dulcería:', error);
+        document.getElementById('dulceria-grid-container').innerHTML = '<p>No se pudieron cargar los productos de dulcería.</p>';
+    }
+}
+
+
+// --- FUNCIONES DEL FLUJO DE COMPRA ---
+
+function openBookingModal(movieId) {
+    document.getElementById('movie').value = movieId;
+    const selectedOption = document.querySelector(`#movie option[value="${movieId}"]`);
+    if(selectedOption) {
+        ordenActual.pelicula.id = movieId;
+        ordenActual.pelicula.titulo = selectedOption.textContent;
+    }
+    updateCartSummary();
+    scrollToBooking();
+}
+
+function addCandyToCart() {
+    ordenActual.dulceria = [];
+    const inputsDulceria = document.querySelectorAll('#dulceria-grid-container input[type="number"]');
+    
+    inputsDulceria.forEach(input => {
+        const cantidad = parseInt(input.value) || 0;
+        if (cantidad > 0) {
+            ordenActual.dulceria.push({
+                id: input.dataset.id,
+                nombre: input.dataset.nombre,
+                precio: parseFloat(input.dataset.precio),
+                cantidad: cantidad
+            });
+        }
+    });
+    alert('Dulcería agregada a tu orden.');
+    updateCartSummary();
+}
+
+function updateCartSummary() {
+    const cartSummary = document.querySelector('.cart-summary');
+    let html = '<h3>Resumen de Compra</h3>';
+    let totalCalculado = 0;
+
+    const preciosBoletos = { adultos: 120.00, ninos: 80.00, mayores: 80.00 }; // Simulación de precios
+    ordenActual.boletos.adultos = parseInt(document.getElementById('adults').value) || 0;
+    ordenActual.boletos.ninos = parseInt(document.getElementById('children').value) || 0;
+    ordenActual.boletos.mayores = parseInt(document.getElementById('seniors').value) || 0;
+
+    if (ordenActual.pelicula.id && (ordenActual.boletos.adultos + ordenActual.boletos.ninos + ordenActual.boletos.mayores > 0)) {
+        html += `<div class="cart-item"><span>Boletos para: <b>${ordenActual.pelicula.titulo}</b></span></div>`;
+        if(ordenActual.boletos.adultos > 0) {
+            const subtotal = ordenActual.boletos.adultos * preciosBoletos.adultos;
+            html += `<div class="cart-item"><span>${ordenActual.boletos.adultos} x Adulto</span><span>$${subtotal.toFixed(2)}</span></div>`;
+            totalCalculado += subtotal;
+        }
+        if(ordenActual.boletos.ninos > 0) {
+            const subtotal = ordenActual.boletos.ninos * preciosBoletos.ninos;
+            html += `<div class="cart-item"><span>${ordenActual.boletos.ninos} x Niño</span><span>$${subtotal.toFixed(2)}</span></div>`;
+            totalCalculado += subtotal;
+        }
+        if(ordenActual.boletos.mayores > 0) {
+            const subtotal = ordenActual.boletos.mayores * preciosBoletos.mayores;
+            html += `<div class="cart-item"><span>${ordenActual.boletos.mayores} x Adulto Mayor</span><span>$${subtotal.toFixed(2)}</span></div>`;
+            totalCalculado += subtotal;
+        }
+    }
+    
+    ordenActual.dulceria.forEach(item => {
+        const subtotal = item.cantidad * item.precio;
+        html += `<div class="cart-item"><span>${item.cantidad} x ${item.nombre}</span><span>$${subtotal.toFixed(2)}</span></div>`;
+        totalCalculado += subtotal;
+    });
+
+    ordenActual.total = totalCalculado;
+
+    html += `<div class="cart-total"><span>Total</span><span>$${ordenActual.total.toFixed(2)}</span></div>`;
+    html += '<button type="button" class="btn" onclick="confirmarPago()" style="width: 100%; margin-top: 1.5rem;">Confirmar Pago</button>';
+    
+    cartSummary.innerHTML = html;
+}
+
+document.getElementById('adults').addEventListener('change', updateCartSummary);
+document.getElementById('children').addEventListener('change', updateCartSummary);
+document.getElementById('seniors').addEventListener('change', updateCartSummary);
+document.getElementById('movie').addEventListener('change', (e) => {
+    const movieId = e.target.value;
+    const selectedOption = document.querySelector(`#movie option[value="${movieId}"]`);
+    if(selectedOption) {
+        ordenActual.pelicula.id = movieId;
+        ordenActual.pelicula.titulo = selectedOption.textContent;
+    } else {
+        ordenActual.pelicula.id = null;
+        ordenActual.pelicula.titulo = '';
+    }
+    updateCartSummary();
+});
+
+
+async function confirmarPago() {
+    if (ordenActual.total <= 0) {
+        alert('Tu carrito está vacío. Por favor, selecciona boletos o productos de dulcería.');
+        return;
+    }
+
+    try {
+        const response = await fetch('api.php?action=guardar_compra', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(ordenActual)
+        });
+
+        const resultado = await response.json();
+
+        if (resultado.success) {
+            alert(`¡Compra realizada con éxito! Tu ID de compra es: ${resultado.id_compra}`);
+            location.reload();
+        } else {
+            alert(`Hubo un error al procesar tu compra: ${resultado.error || 'Error desconocido'}`);
+        }
+
+    } catch (error) {
+        console.error('Error al confirmar el pago:', error);
+        alert('Hubo un problema de conexión al intentar confirmar tu pago.');
+    }
+}
+
+
+// --- FUNCIONES AUXILIARES (MODALES, LOGIN, ETC.) ---
+
+let currentUser = null;
+
+function isLoggedIn() {
+  return currentUser !== null;
+}
+
+function scrollToBooking() {
+    document.getElementById('booking').scrollIntoView({ behavior: 'smooth' });
+}
+
+function selectPaymentMethod(method) {
+    const methods = document.querySelectorAll('.payment-method');
+    methods.forEach(m => m.classList.remove('active'));
+    document.getElementById('paymentForm').style.display = (method === 'card') ? 'block' : 'none';
+    if (method === 'card') {
+        document.querySelector('.payment-method:nth-child(1)').classList.add('active');
+    } else {
+        document.querySelector('.payment-method:nth-child(2)').classList.add('active');
+    }
+}
+
+function openLoginModal() {
+  document.getElementById('loginForm').style.display = 'block';
+  document.getElementById('registerForm').style.display = 'none';
+  document.getElementById('loginModal').style.display = 'block';
+}
+
+function closeModal(modalId) {
+    document.getElementById(modalId).style.display = 'none';
+}
+
+function showRegisterForm() {
+  document.getElementById('loginForm').style.display = 'none';
+  document.getElementById('registerForm').style.display = 'block';
+}
+
+function showLoginForm() {
+  document.getElementById('loginForm').style.display = 'block';
+  document.getElementById('registerForm').style.display = 'none';
+}
+
+async function validateLogin() {
+    const email = document.getElementById('email').value;
+    const password = document.getElementById('password').value;
+
+    if (!email || !password) {
+        alert('Por favor, ingresa tu email y contraseña.');
+        return;
+    }
+
+    try {
+        const response = await fetch('api.php?action=login', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ email: email, password: password })
+        });
+
+        const resultado = await response.json();
+
+        if (resultado.success) {
+            currentUser = resultado.email;
+            alert(`¡Bienvenido de nuevo, ${currentUser}!`);
+            closeModal('loginModal');
+        } else {
+            alert(`Error al iniciar sesión: ${resultado.message}`);
+        }
+
+    } catch (error) {
+        console.error('Error en la conexión de login:', error);
+        alert('No se pudo conectar con el servidor para iniciar sesión.');
+    }
+}
+
+function registerUser() {
+  alert('¡Usuario registrado exitosamente! (Función de registro por implementar)');
+  showLoginForm();
+}
+
+function selectSeats() {
+  if (!isLoggedIn()) {
+    alert('Debes iniciar sesión para continuar con la compra');
+    openLoginModal();
+    return;
+  }
+  const totalTickets = (parseInt(document.getElementById('adults').value) || 0) +
+                       (parseInt(document.getElementById('children').value) || 0) +
+                       (parseInt(document.getElementById('seniors').value) || 0);
+  if (totalTickets === 0) {
+    alert('Por favor selecciona al menos una entrada');
+    return;
+  }
+  generateSeats();
+  document.getElementById('seatsModal').style.display = 'block';
+}
+
+function generateSeats() {
+    const seatsGrid = document.getElementById('seatsGrid');
+    seatsGrid.innerHTML = '';
+    for (let row = 0; row < 10; row++) {
+        const rowLetter = String.fromCharCode(65 + row);
+        for (let seatNum = 1; seatNum <= 10; seatNum++) {
+            const seat = document.createElement('div');
+            seat.className = 'seat';
+            seat.textContent = `${rowLetter}${seatNum}`;
+            seat.setAttribute('data-seat', `${rowLetter}${seatNum}`);
+            if (Math.random() < 0.2) {
+                seat.classList.add('reserved');
+            } else {
+                seat.onclick = function() { this.classList.toggle('selected'); };
+            }
+            seatsGrid.appendChild(seat);
+        }
+    }
+}
+
+function confirmSeats() {
+    const selectedSeats = document.querySelectorAll('.seat.selected');
+    const totalTickets = (parseInt(document.getElementById('adults').value) || 0) +
+                       (parseInt(document.getElementById('children').value) || 0) +
+                       (parseInt(document.getElementById('seniors').value) || 0);
+    if (selectedSeats.length !== totalTickets) {
+        alert(`Debes seleccionar exactamente ${totalTickets} asientos.`);
+        return;
+    }
+    ordenActual.asientos = [];
+    selectedSeats.forEach(seat => {
+        ordenActual.asientos.push(seat.getAttribute('data-seat'));
+    });
+    alert(`Asientos seleccionados: ${ordenActual.asientos.join(', ')}`);
+    closeModal('seatsModal');
+}
+</script>
+</body>
+</html>
